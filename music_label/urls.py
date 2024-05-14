@@ -1,5 +1,5 @@
 """
-URL configuration for music_label_proj project.
+URL configuration for music_label project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -16,7 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+urlpatterns += [
+    path('label/', include('label.urls')),
+    path('index/', RedirectView.as_view(url='/label/', permanent=True)),
 ]
