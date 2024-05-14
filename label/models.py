@@ -75,7 +75,7 @@ class ConcertProgram(models.Model):
 
 class MemberToMusicBand(models.Model):
     member_to_music_band_id = models.AutoField(primary_key=True)
-    member = models.ForeignKey('Members', on_delete=models.PROTECT, db_column='members')
+    member = models.ForeignKey('Members', on_delete=models.PROTECT, db_column='member')
     music_band = models.ForeignKey('MusicBand', on_delete=models.PROTECT, db_column='music_band')
     member_role = models.ForeignKey('MemberRoles', on_delete=models.PROTECT, db_column='member_role')
     member_join_date = models.DateField()
