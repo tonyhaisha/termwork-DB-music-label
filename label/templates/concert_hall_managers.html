@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Hall Managers</title>
+</head>
+<body>
+    <h1>Concert Hall Managers</h1>
+    <ul>
+        {% for concert_hall_manager in data %}
+        <li>{{ concert_hall_manager.concert_hall_manager_id }}. {{ concert_hall_manager.surname }} {{ concert_hall_manager.name }} {{ concert_hall_manager.patronymic }} {{ concert_hall_manager.phone_number }} {{ concert_hall_manager.concert_hall.concert_hall_name }}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

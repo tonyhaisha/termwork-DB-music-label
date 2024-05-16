@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Hall Contracts</title>
+</head>
+<body>
+    <h1>Concert Hall Contracts</h1>
+    <ul>
+        {% for concert_hall_contract in data %}
+        <li>{{concert_hall_contract.concert_hall_contract_id}}. {{concert_hall_contract.concert_hall.concert_hall_name}} {{concert_hall_contract.contract_start_date}} {{concert_hall_contract.contract_end_date}}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

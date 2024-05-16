@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Roles</title>
+</head>
+<body>
+    <h1>Member Roles</h1>
+    <ul>
+        {% for member_role in data %}
+        <li>{{ member_role.member_roles_id }}. {{ member_role.role_name }}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

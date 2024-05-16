@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member To Music Bands</title>
+</head>
+<body>
+    <h1>Member To Music Bands</h1>
+    <ul>
+        {% for member_to_music_band in data %}
+        <li>{{ member_to_music_band.member_to_music_band_id }}. {{ member_to_music_band.member.surname }} {{ member_to_music_band.member.name }} {{ member_to_music_band.member.patronymic }} {{ member_to_music_band.music_band.music_band_name }} {{ member_to_music_band.member_role.role_name }} {{ member_to_music_band.member_join_date }}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

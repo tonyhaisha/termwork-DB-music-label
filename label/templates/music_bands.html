@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Bands</title>
+</head>
+<body>
+    <h1>Music Bands</h1>
+    <ul>
+        {% for music_band in data %}
+        <li>{{ music_band.music_band_id }}. {{ music_band.music_band_name }} {{ music_band.music_genre }} {{ music_band.foundation_date }} {{ music_band.members_quantity }}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

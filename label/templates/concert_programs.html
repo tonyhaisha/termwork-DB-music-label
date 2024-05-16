@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Programs</title>
+</head>
+<body>
+    <h1>Concert Programs</h1>
+    <ul>
+        {% for concert_program in data %}
+        <li>{{ concert_program.concert_program_id }}. {{ concert_program.concert_date }} {{ concert_program.concert_start_time }} {{ concert_program.concert_end_time }} {{ concert_program.music_band.music_band_name }} {{ concert_program.concert_hall.concert_hall_name }}</li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>
