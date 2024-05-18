@@ -55,7 +55,20 @@ ROOT_URLCONF = 'music_label.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'label' / 'templates',
+            BASE_DIR / 'label' / 'templates' / 'tables',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'concert_hall_contracts_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'concert_hall_managers_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'concert_halls_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'concert_programs_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'member_roles_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'member_to_music_band_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'members_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'music_band_contracts_cruds',
+            BASE_DIR / 'label' / 'templates' / 'table_cruds' / 'music_bands_cruds',
+
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

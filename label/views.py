@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from .models import (
     Members, MusicBand, ConcertHall, MemberRoles, ConcertHallContract,
     ConcertHallManager, ConcertProgram, MemberToMusicBand, MusicBandContract
 )
+from .forms import MemberForm
 # Create your views here.
 
 def index(request):
@@ -48,3 +49,31 @@ def member_to_music_bands(request):
 def music_band_contracts(request):
     data = MusicBandContract.objects.all()
     return render(request, 'music_band_contracts.html', {'data': data})
+
+def edit_member(request, members_id):
+    member = get_object_or_404(Members, members_id=members_id)
+    if request.method == "POST":
+        form = MemberForm(request.POST, instance=member)
+        if form.is_valid():
+            form.save()
+            return redirect('members')
+    else:
+        form = MemberForm(instance=member)
+    return render(request, 'edit_member.html', {'form': form})
+
+def create_member(request):
+    if request.method == "POST":
+        form = MemberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('members')
+    else:
+        form = MemberForm()
+    return render(request, 'create_member.html', {'form': form})
+
+def delete_member(request, members_id):
+    member = get_object_or_404(Members, members_id=members_id)
+    if request.method == "POST":
+        member.delete()
+        return redirect('members')
+    return redirect('members')

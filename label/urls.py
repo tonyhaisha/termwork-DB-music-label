@@ -13,4 +13,8 @@ urlpatterns = [
     path('concert_programs/', views.concert_programs, name='concert_programs'),
     path('member_to_music_bands/', views.member_to_music_bands, name='member_to_music_bands'),
     path('music_band_contracts/', views.music_band_contracts, name='music_band_contracts'),
+    path('members/edit/<int:members_id>/', views.edit_member, name='edit_member'),
+    path('members/create/', views.create_member, name='create_member'),
+    path('members/delete/<int:members_id>/', views.delete_member, name='delete_member'),
+
 ]
