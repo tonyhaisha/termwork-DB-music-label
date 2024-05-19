@@ -4,14 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concert Programs</title>
+    <style>
+        table {
+            width: 75%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>Concert Programs</h1>
-    <ul>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Concert Date</th>
+                <th>Concert Start Time</th>
+                <th>Concert Start Time</th>
+                <th>Music Band</th>
+                <th>Concert Hall</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for concert_program in data %}
-        <li>{{ concert_program.concert_program_id }}. {{ concert_program.concert_date }} {{ concert_program.concert_start_time }} {{ concert_program.concert_end_time }} {{ concert_program.music_band.music_band_name }} {{ concert_program.concert_hall.concert_hall_name }}</li>
+        <tr>
+            <td>{{ concert_program.concert_program_id }}</td>
+            <td>{{ concert_program.concert_date }}</td>
+            <td>{{ concert_program.concert_start_time }}</td>
+            <td>{{ concert_program.concert_end_time }}</td>
+            <td>{{ concert_program.music_band.music_band_name }}</td>
+            <td>{{ concert_program.concert_hall.concert_hall_name }}</td>
+            <td class="action-buttons">
+                    <button onclick="location.href='{% url 'edit_concert_program' concert_program.concert_program_id %}'">Edit</button>
+                    <form action="{% url 'delete_concert_program' concert_program.concert_program_id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this concert program?')">Delete</button>
+                    </form>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+    <div class="button-container">
+        <button onclick="location.href='{% url 'create_concert_program' %}'">Create New Concert Program</button>
+    </div>
     <button onclick="location.href='{% url 'index' %}'">Back</button>
 </body>
 </html>

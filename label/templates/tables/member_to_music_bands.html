@@ -4,14 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Member To Music Bands</title>
+    <style>
+        table {
+            width: 75%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <h1>Member To Music Bands</h1>
-    <ul>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Surname</th>
+                <th>Name</th>
+                <th>Patronymic</th>
+                <th>Music Band</th>
+                <th>Member Role</th>
+                <th>Join Date</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for member_to_music_band in data %}
-        <li>{{ member_to_music_band.member_to_music_band_id }}. {{ member_to_music_band.member.surname }} {{ member_to_music_band.member.name }} {{ member_to_music_band.member.patronymic }} {{ member_to_music_band.music_band.music_band_name }} {{ member_to_music_band.member_role.role_name }} {{ member_to_music_band.member_join_date }}</li>
+        <tr>
+            <td>{{ member_to_music_band.member_to_music_band_id }} </td>
+            <td>{{ member_to_music_band.member.surname }}</td>
+            <td>{{ member_to_music_band.member.name }}</td>
+            <td>{{ member_to_music_band.member.patronymic }}</td>
+            <td>{{ member_to_music_band.music_band.music_band_name }}</td>
+            <td>{{ member_to_music_band.member_role.role_name }}</td>
+            <td>{{ member_to_music_band.member_join_date }}</td>
+            <td class="action-buttons">
+                    <button onclick="location.href='{% url 'edit_member_to_music_band' member_to_music_band.member_to_music_band_id %}'">Edit</button>
+                    <form action="{% url 'delete_member_to_music_band' member_to_music_band.member_to_music_band_id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
+                    </form>
+            </td>
+        </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
+    <div class="button-container">
+        <button onclick="location.href='{% url 'create_member_to_music_band' %}'">Create New</button>
+    </div>
     <button onclick="location.href='{% url 'index' %}'">Back</button>
 </body>
 </html>

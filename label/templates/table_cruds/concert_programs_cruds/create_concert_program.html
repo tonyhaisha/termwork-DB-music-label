@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Concert Program</title>
+</head>
+<body>
+    <h1>Create Concert Program</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <button onclick="location.href='{% url 'concert_programs' %}'">Cancel</button>
+</body>
+</html>
