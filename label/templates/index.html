@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Database Tables</title>
+    <title>Music Label Database Management Panel</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
 </head>
 <body>
     <nav>
@@ -17,32 +19,34 @@
         </ul>
     </nav>
     <h1>Database Tables</h1>
-    {% if can_view_members %}
-    <button onclick="location.href='{% url 'members' %}'">View Members</button>
-    {% endif %}
-    {% if can_view_music_bands %}
-    <button onclick="location.href='{% url 'music_bands' %}'">View Music Bands</button>
-    {% endif %}
-    {% if can_view_concert_halls %}
-    <button onclick="location.href='{% url 'concert_halls' %}'">View Concert Halls</button>
-    {% endif %}
-    {% if can_view_member_roles %}
-    <button onclick="location.href='{% url 'member_roles' %}'">View Member Roles</button>
-    {% endif %}
-    {% if can_view_concert_hall_contracts %}
-    <button onclick="location.href='{% url 'concert_hall_contracts' %}'">View Concert Hall Contracts</button>
-    {% endif %}
-    {% if can_view_concert_hall_managers %}
-    <button onclick="location.href='{% url 'concert_hall_managers' %}'">View Concert Hall Managers</button>
-    {% endif %}
-    {% if can_view_concert_programs %}
-    <button onclick="location.href='{% url 'concert_programs' %}'">View Concert Programs</button>
-    {% endif %}
-    {% if can_view_member_to_music_bands %}
-    <button onclick="location.href='{% url 'member_to_music_bands' %}'">View Member To Music Bands</button>
-    {% endif %}
-    {% if can_view_music_band_contracts %}
-    <button onclick="location.href='{% url 'music_band_contracts' %}'">View Music Band Contracts</button>
-    {% endif %}
+    <div class="button-container">
+        {% if can_view_members %}
+        <button onclick="location.href='{% url 'members' %}'">View Members</button>
+        {% endif %}
+        {% if can_view_music_bands %}
+        <button onclick="location.href='{% url 'music_bands' %}'">View Music Bands</button>
+        {% endif %}
+        {% if can_view_concert_halls %}
+        <button onclick="location.href='{% url 'concert_halls' %}'">View Concert Halls</button>
+        {% endif %}
+        {% if can_view_member_roles %}
+        <button onclick="location.href='{% url 'member_roles' %}'">View Member Roles</button>
+        {% endif %}
+        {% if can_view_concert_hall_contracts %}
+        <button onclick="location.href='{% url 'concert_hall_contracts' %}'">View Concert Hall Contracts</button>
+        {% endif %}
+        {% if can_view_concert_hall_managers %}
+        <button onclick="location.href='{% url 'concert_hall_managers' %}'">View Concert Hall Managers</button>
+        {% endif %}
+        {% if can_view_concert_programs %}
+        <button onclick="location.href='{% url 'concert_programs' %}'">View Concert Programs</button>
+        {% endif %}
+        {% if can_view_member_to_music_bands %}
+        <button onclick="location.href='{% url 'member_to_music_bands' %}'">View Member To Music Bands</button>
+        {% endif %}
+        {% if can_view_music_band_contracts %}
+        <button onclick="location.href='{% url 'music_band_contracts' %}'">View Music Band Contracts</button>
+        {% endif %}
+    </div>
 </body>
 </html>

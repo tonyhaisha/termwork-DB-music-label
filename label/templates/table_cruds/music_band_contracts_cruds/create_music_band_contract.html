@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Music Band Contract</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/crud_style.css' %}">
 </head>
 <body>
+<div class="container">
     <h1>Create Music Band Contract</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>
+        <button onclick="location.href='{% url 'music_band_contracts' %}'">Cancel</button>
     </form>
-    <button onclick="location.href='{% url 'music_band_contracts' %}'">Cancel</button>
+</div>
 </body>
 </html>

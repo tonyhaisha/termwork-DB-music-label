@@ -4,27 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Band Contracts</title>
-    <style>
-        table {
-            width: 75%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-        .action-buttons button {
-            margin-right: 5px;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/table_style.css' %}">
 </head>
 <body>
     <h1>Music Band Contracts</h1>
@@ -65,6 +46,8 @@
             <button onclick="location.href='{% url 'create_music_band_contract' %}'">Create New Contract</button>
         {% endif %}
     </div>
+    <div class="button-container">
     <button onclick="location.href='{% url 'index' %}'">Back</button>
+    </div>
 </body>
 </html>
