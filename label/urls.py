@@ -50,4 +50,6 @@ urlpatterns = [
     path('music_band/create/', views.create_music_band, name='create_music_band'),
     path('music_band/delete/<int:music_band_id>/', views.delete_music_band, name='delete_music_band'),
 
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
 ]

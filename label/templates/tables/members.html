@@ -36,6 +36,7 @@
                 <th>Name</th>
                 <th>Patronymic</th>
                 <th>Phone Number</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -47,18 +48,24 @@
                 <td>{{ member.patronymic }}</td>
                 <td>{{ member.phone_number }}</td>
                 <td class="action-buttons">
-                    <button onclick="location.href='{% url 'edit_member' member.members_id %}'">Edit</button>
-                    <form action="{% url 'delete_member' member.members_id %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this member?')">Delete</button>
-                    </form>
+                    {% if can_change %}
+                        <button onclick="location.href='{% url 'edit_member' member.members_id %}'">Edit</button>
+                    {% endif %}
+                    {% if can_delete %}
+                        <form action="{% url 'delete_member' member.members_id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this member?')">Delete</button>
+                        </form>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <div class="button-container">
-        <button onclick="location.href='{% url 'create_member' %}'">Create New Member</button>
+        {% if can_add %}
+            <button onclick="location.href='{% url 'create_member' %}'">Create New Member</button>
+        {% endif %}
     </div>
     <button onclick="location.href='{% url 'index' %}'">Back</button>
 </body>
