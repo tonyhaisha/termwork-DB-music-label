@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import Permission
+from django.db import connection, OperationalError
 from .models import (
     Members, MusicBand, ConcertHall, MemberRoles, ConcertHallContract,
     ConcertHallManager, ConcertProgram, MemberToMusicBand, MusicBandContract
@@ -27,6 +27,7 @@ def index(request):
         'can_view_concert_programs': request.user.has_perm('label.view_concertprogram'),
         'can_view_member_to_music_bands': request.user.has_perm('label.view_membertomusicband'),
         'can_view_music_band_contracts': request.user.has_perm('label.view_musicbandcontract'),
+        'can_query': request.user.has_perm('label.run_sql_queries'),
     }
     return render(
         request,
@@ -462,3 +463,30 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+@login_required
+@permission_required('label.run_sql_queries', raise_exception=True)
+def sql_query_view(request):
+    results = None
+    columns = None
+    error = None
+
+    if request.method == 'POST':
+        sql_query = request.POST.get('sql_query')
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(sql_query)
+                if sql_query.strip().lower().startswith('select'):
+                    columns = [col[0] for col in cursor.description]
+                    results = cursor.fetchall()
+                else:
+                    connection.commit()
+        except OperationalError as e:
+            error = str(e)
+
+    return render(request, 'sql_query.html', {
+        'results': results,
+        'columns': columns,
+        'error': error
+    })
+

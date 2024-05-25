@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sql_query_style.css' %}">
+    <script>
+        function insertQuery(query) {
+            document.getElementById('sql-query-input').value = query;
+        }
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="insertQuery('SELECT * FROM members;')">Select All Members</button>
+        <button onclick="insertQuery('SELECT * FROM music_bands;')">Select All Music Bands</button>
+        <button onclick="insertQuery('SELECT * FROM concert_halls;')">Select All Concert Halls</button>
+        <button onclick="insertQuery('SELECT * FROM concert_programs;')">Select All Concert Programs</button>
+        <button onclick="insertQuery('SELECT * FROM member_roles;')">Select All Member Roles</button>
+    </div>
+    <h1>Execute SQL Query</h1>
+    <form method="post">
+        {% csrf_token %}
+        <textarea id="sql-query-input" name="sql_query" rows="10" cols="50" placeholder="Enter your SQL query here"></textarea><br>
+        <button type="submit">Execute</button>
+    </form>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if results %}
+        <h2>Results:</h2>
+        <table>
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in results %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <button onclick="location.href='{% url 'index' %}'">Back</button>
+</body>
+</html>

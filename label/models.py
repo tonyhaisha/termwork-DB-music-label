@@ -10,7 +10,7 @@ class Members(models.Model):
     phone_number = models.CharField(max_length=12)
 
     def __str__(self):
-        return self.name
+        return f'{self.surname} {self.name} {self.patronymic}'
     class Meta:
         db_table = 'members'
 
@@ -21,6 +21,8 @@ class MusicBand(models.Model):
     foundation_date = models.DateField()
     members_quantity = models.IntegerField()
 
+    def __str__(self):
+        return self.music_band_name
     class Meta:
         db_table = 'music_band'
 
@@ -34,12 +36,17 @@ class ConcertHall(models.Model):
     ticket_revenue_percent = models.IntegerField()
     hall_square_area = models.IntegerField()
 
+    def __str__(self):
+        return self.concert_hall_name
     class Meta:
         db_table = 'concert_hall'
 
 class MemberRoles(models.Model):
     member_roles_id = models.AutoField(primary_key=True)
     role_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.role_name
 
     class Meta:
         db_table = 'member_roles'
@@ -49,6 +56,9 @@ class ConcertHallContract(models.Model):
     concert_hall = models.ForeignKey('ConcertHall', on_delete=models.PROTECT, db_column='concert_hall')
     contract_start_date = models.DateField()
     contract_end_date = models.DateField()
+
+    def __str__(self):
+        return self.concert_hall.concert_hall_name
 
     class Meta:
         db_table = 'concert_hall_contract'
@@ -61,6 +71,9 @@ class ConcertHallManager(models.Model):
     phone_number = models.CharField(max_length=12)
     concert_hall = models.ForeignKey('ConcertHall', on_delete=models.PROTECT, db_column='concert_hall')
 
+    def __str__(self):
+        return f'{self.surname} {self.name} {self.patronymic}'
+
     class Meta:
         db_table = 'concert_hall_manager'
 
@@ -72,6 +85,9 @@ class ConcertProgram(models.Model):
     music_band = models.ForeignKey('MusicBand', on_delete=models.PROTECT, db_column='music_band', blank=True, null=True)
     concert_hall = models.ForeignKey('ConcertHall', on_delete=models.PROTECT, db_column='concert_hall', blank=True, null=True)
 
+    def __str__(self):
+        return self.music_band.music_band_name
+
     class Meta:
         db_table = 'concert_program'
 
@@ -82,6 +98,8 @@ class MemberToMusicBand(models.Model):
     member_role = models.ForeignKey('MemberRoles', on_delete=models.PROTECT, db_column='member_role')
     member_join_date = models.DateField()
 
+    def __str__(self):
+        return f'{self.member.surname} {self.member.name} {self.member.patronymic}'
     class Meta:
         db_table = 'member_to_music_band'
 
@@ -90,6 +108,9 @@ class MusicBandContract(models.Model):
     music_band = models.ForeignKey('MusicBand', on_delete=models.PROTECT, db_column='music_band')
     contract_start_date = models.DateField()
     contract_end_date = models.DateField()
+
+    def __str__(self):
+        return self.music_band.music_band_name
 
     class Meta:
         db_table = 'music_band_contract'

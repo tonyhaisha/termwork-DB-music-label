@@ -16,6 +16,7 @@
             {% else %}
                 <li><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
+            <li><a href="https://afisha.yandex.ru/moscow/concert?source=menu">Tickets</a></li>
         </ul>
     </nav>
     <h1>Database Tables</h1>
@@ -47,6 +48,11 @@
         {% if can_view_music_band_contracts %}
         <button onclick="location.href='{% url 'music_band_contracts' %}'">View Music Band Contracts</button>
         {% endif %}
+        {% if can_query %}
+        <button onclick="location.href='{% url 'sql_query' %}'">Execute SQL Query</button>
+        {% endif %}
     </div>
 </body>
 </html>
+
+
