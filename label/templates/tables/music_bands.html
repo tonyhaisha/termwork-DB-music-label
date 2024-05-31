@@ -39,6 +39,8 @@
                     </form>
                 {% endif %}
                 <button onclick="location.href='https://afisha.yandex.ru/search?city=moscow&source=suggest&search-text={{ music_band.music_band_name|urlencode }}'">Tickets</button>
+                <button onclick="location.href='{% url 'generate_band_revenue_report' music_band.music_band_name %}'">Generate Revenue Report</button>
+                <button onclick="location.href='{% url 'generate_band_concert_report' music_band.music_band_name %}'">Generate Concert Program</button>
             </td>
         </tr>
         {% endfor %}

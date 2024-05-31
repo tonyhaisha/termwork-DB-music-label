@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -10,6 +11,10 @@ from .models import (
 from .forms import (
     MemberForm, MusicBandForm, ConcertHallForm, MemberRolesForm, ConcertHallContractForm,
     ConcertHallManagerForm, ConcertProgramForm, MemberToMusicBandForm, MusicBandContractForm
+)
+from .doc_render import (
+    get_concert_data_for_band_revenue, get_concert_data_for_band_concert, get_concert_data_for_hall_concert,
+    generate_pdf, generate_band_concerts_pdf, generate_hall_concerts_pdf
 )
 # Create your views here.
 
@@ -489,4 +494,34 @@ def sql_query_view(request):
         'columns': columns,
         'error': error
     })
+
+@login_required
+def generate_band_revenue_report(request, band_name):
+    concerts = get_concert_data_for_band_revenue(band_name)
+    pdf_file = generate_pdf(concerts, band_name)
+
+    with open(pdf_file, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{band_name}_payment_report.pdf"'
+        return response
+
+@login_required
+def generate_band_concert_report(request, band_name):
+    concerts = get_concert_data_for_band_concert(band_name)
+    pdf_file = generate_band_concerts_pdf(concerts, band_name)
+
+    with open(pdf_file, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{band_name}_concert_program.pdf"'
+        return response
+
+@login_required
+def generate_hall_concert_report(request, hall_name):
+    concerts = get_concert_data_for_hall_concert(hall_name)
+    pdf_file = generate_hall_concerts_pdf(concerts, hall_name)
+
+    with open(pdf_file, 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{hall_name}_concert_program.pdf"'
+        return response
 

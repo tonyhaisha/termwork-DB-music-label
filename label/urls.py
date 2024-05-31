@@ -54,4 +54,9 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
 
     path('sql_query/', views.sql_query_view, name='sql_query'),
+
+    path('generate_band_revenue_report/<str:band_name>/', views.generate_band_revenue_report, name='generate_band_revenue_report'),
+    path('generate_band_concert_report/<str:band_name>/', views.generate_band_concert_report, name='generate_band_concert_report'),
+    path('generate_hall_concert_report/<str:hall_name>/', views.generate_hall_concert_report, name='generate_hall_concert_report'),
+
 ]
