@@ -14,11 +14,11 @@
 </head>
 <body>
     <div class="button-container">
+        <button onclick="insertQuery('SELECT surname, name, patronymic, phone_number, concert_hall.concert_hall_name FROM concert_hall_manager JOIN concert_hall ON concert_hall_manager.concert_hall = concert_hall.concert_hall_id;')">Concert Hall Managers and their Halls</button>
+        <button onclick="insertQuery('SELECT members.surname, members.name, members.patronymic, music_band.music_band_name FROM member_to_music_band JOIN members ON member_to_music_band.member = members.members_id JOIN music_band ON member_to_music_band.music_band = music_band.music_band_id WHERE music_band.music_band_name = &quot;Weaponized Mayhem&quot;')">Weaponized Mayhem's members</button>
+        <button onclick="insertQuery('SELECT concert_hall_name, address, quantity_of_people, hall_square_area FROM concert_hall WHERE hall_square_area = (SELECT MAX(hall_square_area) FROM concert_hall);')">Select The Biggest Concert Hall</button>
+        <button onclick="insertQuery('SELECT concert_hall.concert_hall_name, music_band.music_band_name, concert_program.concert_date, concert_program.concert_start_time, concert_program.concert_end_time FROM concert_program JOIN concert_hall ON concert_program.concert_hall = concert_hall.concert_hall_id JOIN music_band ON concert_program.music_band = music_band.music_band_id WHERE concert_hall.ticket_revenue_percent = (SELECT MIN(concert_hall.ticket_revenue_percent) FROM concert_hall);')">Concert Program with minimal Hall Revenue %</button>
         <button onclick="insertQuery('SELECT * FROM members;')">Select All Members</button>
-        <button onclick="insertQuery('SELECT * FROM music_bands;')">Select All Music Bands</button>
-        <button onclick="insertQuery('SELECT * FROM concert_halls;')">Select All Concert Halls</button>
-        <button onclick="insertQuery('SELECT * FROM concert_programs;')">Select All Concert Programs</button>
-        <button onclick="insertQuery('SELECT * FROM member_roles;')">Select All Member Roles</button>
     </div>
     <h1>Execute SQL Query</h1>
     <form method="post">
